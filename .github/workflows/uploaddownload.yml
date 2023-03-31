@@ -26,7 +26,7 @@ jobs:
     steps:
       - shell: bash
         run: |
-             "Welcome" + username > output.log
+             username > output.log
       - name: Upload output file
         uses: actions/upload-artifact@v3
         with:
