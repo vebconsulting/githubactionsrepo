@@ -26,7 +26,6 @@ jobs:
     steps:
       - shell: bash
         run: |
-             username > output.log
              date > output.log
       - name: Upload output file
         uses: actions/upload-artifact@v3
