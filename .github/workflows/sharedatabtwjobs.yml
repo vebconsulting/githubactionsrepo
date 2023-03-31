@@ -3,23 +3,24 @@ name: Share data between jobs
 on: [push]
 env:
  basic: 40000
+ da: 2000
 
 jobs:
   job_1:
-    name: Add Basic and 7
+    name: Add Basic and DA
     runs-on: ubuntu-latest
     steps:
       - shell: bash
         run: |
-          expr $basic + 7 > math-homework.txt
+          expr $basic + $da > pay.txt
       - name: Upload math result for job 1
         uses: actions/upload-artifact@v3
         with:
           name: homework
-          path: math-homework.txt
+          path: pay.txt
 
   job_2:
-    name: Multiply by 9
+    name: Deduct PF
     needs: job_1
     runs-on: windows-latest
     steps:
@@ -35,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: homework
-          path: math-homework.txt
+          path: pay.txt
 
   job_3:
     name: Display results
@@ -49,5 +50,5 @@ jobs:
       - name: Print the final result
         shell: bash
         run: |
-          value=`cat math-homework.txt`
+          value=`cat pay.txt`
           echo The result is $value
